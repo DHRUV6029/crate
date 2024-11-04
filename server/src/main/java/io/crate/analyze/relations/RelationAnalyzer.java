@@ -88,6 +88,7 @@ import io.crate.sql.tree.DefaultTraversalVisitor;
 import io.crate.sql.tree.Except;
 import io.crate.sql.tree.Expression;
 import io.crate.sql.tree.FunctionCall;
+import io.crate.sql.tree.GroupBy;
 import io.crate.sql.tree.IntegerLiteral;
 import io.crate.sql.tree.Intersect;
 import io.crate.sql.tree.Join;
@@ -416,7 +417,7 @@ public class RelationAnalyzer extends DefaultTraversalVisitor<AnalyzedRelation, 
 
         List<Symbol> groupBy = analyzeGroupBy(
             selectAnalysis,
-            node.getGroupBy(),
+            node.getGroupBy().map(GroupBy::getExpressions).orElse(List.of()),
             expressionAnalyzer,
             expressionAnalysisContext);
 

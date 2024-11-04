@@ -220,6 +220,10 @@ public abstract class AstVisitor<R, C> {
         return visitNode(node, context);
     }
 
+    protected R visitGroupBy(GroupBy node, C context) {
+        return visitNode(node, context);
+    }
+
     protected R visitTable(Table<?> node, C context) {
         return visitQueryBody(node, context);
     }
